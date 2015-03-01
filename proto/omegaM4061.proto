@@ -1,0 +1,56 @@
+Terminator = CR LF;
+
+readFlow {
+	out "!\$1,F";
+	in "!\$1,%f";
+	@init {
+		# Set to SLPM
+		out "!\$1,U,SLPM";
+		in "!\$1,USLPM";
+	}
+}
+
+setFlow {
+	out "!\$1,S,%f";
+	in "!\$1S%f";
+	@init {
+		# set to digital mode
+		out "!\$1,M,D";
+		in "!\$1,M,D";
+	}
+}
+
+setK {
+	out "!\$1,K,E,%f";
+	in "!\$1,KE%f";
+}
+
+setValve {
+	out "!\$1,V,%{A|O|C}";
+	in "!\$1,V%{A|O|C}";
+}
+
+getValve {
+	out "!\$1,V,S";
+	in "!\$1,%{VA|VO|VC}";
+}
+
+readTotalFlow {
+	out "!\$1,T,R";
+	in "!\$1,%f";
+}
+
+startTotal {
+	out "!\$1,T,S,N";
+	in "!\$1,TSN";
+}
+
+stopTotal {
+	out "!\$1,T,P,N";
+	in "!\$1,TPN";
+}
+
+zeroTotal {
+	out "!\$1,T,Z";
+	in "!\$1,TZ";
+}

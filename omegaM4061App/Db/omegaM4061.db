@@ -1,0 +1,77 @@
+record(ai, "$(Sys)$(Dev)F-I"){
+	field(DTYP, "stream")
+	field(INP, "@omegaM4061.proto readFlow($(ADDR)) $(PORT)")
+	field(EGU, "SLPM")
+	field(SCAN, "$(SCAN)")
+	field(PREC, "$(PREC)")
+}
+
+record(ai, "$(Sys)$(Dev)F:Total-I"){
+	field(DTYP, "stream")
+	field(INP, "@omegaM4061.proto readTotalFlow($(ADDR)) $(PORT)")
+	field(EGU, "L")
+	field(SCAN, "$(SCAN)")
+	field(PREC, "$(PREC)")
+}
+
+record(ao, "$(Sys)$(Dev)F:K-SP"){
+	field(VAL, "$(K_FACTOR)")
+	field(DTYP, "stream")
+	field(OUT, "@omegaM4061.proto setK($(ADDR)) $(PORT)")
+	field(PINI, "1")
+	field(FLNK, "$(Sys)$(Dev)F:K-RB")
+	field(PREC, "$(PREC)")
+	info(autosaveFields, "VAL")
+}
+
+record(ai, "$(Sys)$(Dev)F:K-RB"){
+	field(INP, "$(Sys)$(Dev)F:K-SP.VAL NPP MS")
+	field(PREC, "$(PREC)")
+}
+
+record(mbbi, "$(Sys)$(Dev)Cmd:Valve-Sts"){
+	field(DTYP, "stream")
+	field(INP, "@omegaM4061.proto getValve($(ADDR)) $(PORT)")
+	field(ZRST, "Auto")
+	field(ONST, "Force Open")
+	field(TWST, "Force Closed")
+	field(SCAN, "$(SCAN)")
+}
+
+record(mbbo, "$(Sys)$(Dev)Cmd:Valve-Sel"){
+	field(DTYP, "stream")
+	field(OUT, "@omegaM4061.proto setValve($(ADDR)) $(PORT)")
+	field(ZRST, "Auto")
+	field(ONST, "Force Open")
+	field(TWST, "Force Closed")
+}
+
+record(bo, "$(Sys)$(Dev)Cmd:Zero-Cmd"){
+	field(DTYP, "stream")
+	field(OUT, "@omegaM4061.proto zeroTotal($(ADDR)) $(PORT)")
+}
+
+record(bo, "$(Sys)$(Dev)Cmd:Start-Cmd"){
+	field(DTYP, "stream")
+	field(OUT, "@omegaM4061.proto startTotal($(ADDR)) $(PORT)")
+}
+
+record(bo, "$(Sys)$(Dev)Cmd:Stop-Cmd"){
+	field(DTYP, "stream")
+	field(OUT, "@omegaM4061.proto stopTotal($(ADDR)) $(PORT)")
+}
+
+record(seq, "$(Sys)$(Dev)Cmd:Reset-Cmd"){
+	# Stop, Reset and Start
+	field(LNK1, "$(Sys)$(Dev)Cmd:Stop-Cmd PP")
+	field(LNK2, "$(Sys)$(Dev)Cmd:Zero-Cmd PP")
+	field(LNK3, "$(Sys)$(Dev)Cmd:Start-Cmd PP")
+	field(DO1, "1")
+	field(DO2, "1")
+	field(DO3, "1")
+	field(SELM, "All")
+	field(DLY1, "0")
+	field(DLY2, "1")
+	field(DLY3, "1")
+}
+
