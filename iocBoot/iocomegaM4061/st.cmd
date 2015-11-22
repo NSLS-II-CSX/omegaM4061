@@ -5,11 +5,13 @@
 
 < envPaths
 
+cd("${TOP}")
+
 epicsEnvSet("EPICS_CA_AUTO_ADDR_LIST" , "NO")
 epicsEnvSet("EPICS_CA_ADDR_LIST"      , "10.23.0.255")
 
 ## Register all support components
-dbLoadDatabase("../../dbd/omegaM4061.dbd",0,0)
+dbLoadDatabase("$(TOP)/dbd/omegaM4061.dbd",0,0)
 omegaM4061_registerRecordDeviceDriver(pdbbase) 
 
 # Do ASYN stuff
