@@ -1,0 +1,4 @@
+NAME=omegaM4061
+USER=softioc
+PORT=5012
+HOST=xf23id1-ioc3

@@ -6,26 +6,18 @@ record(ai, "$(Sys)$(Dev)F-I"){
 	field(PREC, "$(PREC)")
 }
 
+record(ao, "$(Sys)$(Dev)F-SP"){
+	field(DTYP, "stream")
+	field(OUT, "@omegaM4061.proto setFlow($(ADDR)) $(PORT)")
+	field(EGU, "SLPM")
+	field(PREC, "$(PREC)")
+}
+
 record(ai, "$(Sys)$(Dev)F:Total-I"){
 	field(DTYP, "stream")
 	field(INP, "@omegaM4061.proto readTotalFlow($(ADDR)) $(PORT)")
 	field(EGU, "L")
 	field(SCAN, "$(SCAN)")
-	field(PREC, "$(PREC)")
-}
-
-record(ao, "$(Sys)$(Dev)F:K-SP"){
-	field(VAL, "$(K_FACTOR)")
-	field(DTYP, "stream")
-	field(OUT, "@omegaM4061.proto setK($(ADDR)) $(PORT)")
-	field(PINI, "1")
-	field(FLNK, "$(Sys)$(Dev)F:K-RB")
-	field(PREC, "$(PREC)")
-	info(autosaveFields, "VAL")
-}
-
-record(ai, "$(Sys)$(Dev)F:K-RB"){
-	field(INP, "$(Sys)$(Dev)F:K-SP.VAL NPP MS")
 	field(PREC, "$(PREC)")
 }
 
@@ -59,6 +51,11 @@ record(bo, "$(Sys)$(Dev)Cmd:Start-Cmd"){
 record(bo, "$(Sys)$(Dev)Cmd:Stop-Cmd"){
 	field(DTYP, "stream")
 	field(OUT, "@omegaM4061.proto stopTotal($(ADDR)) $(PORT)")
+}
+
+record(bo, "$(Sys)$(Dev)Cmd:Cal0-Cmd"){
+	field(DTYP, "stream")
+	field(OUT, "@omegaM4061.proto zero($(ADDR)) $(PORT)")
 }
 
 record(seq, "$(Sys)$(Dev)Cmd:Reset-Cmd"){

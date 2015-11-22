@@ -5,24 +5,20 @@ readFlow {
 	in "!\$1,%f";
 	@init {
 		# Set to SLPM
+		out "!\$1,M,D";
+		in "!\$1,MD";
+		out "!\$1,K,D";
+		in "!\$1,KD";
 		out "!\$1,U,SLPM";
 		in "!\$1,USLPM";
+		out "!\$1,Z,E";
+		in "!\$1,ZE";
 	}
 }
 
 setFlow {
 	out "!\$1,S,%f";
-	in "!\$1S%f";
-	@init {
-		# set to digital mode
-		out "!\$1,M,D";
-		in "!\$1,M,D";
-	}
-}
-
-setK {
-	out "!\$1,K,E,%f";
-	in "!\$1,KE%f";
+	in "!\$1,S%f";
 }
 
 setValve {
@@ -53,4 +49,9 @@ stopTotal {
 zeroTotal {
 	out "!\$1,T,Z";
 	in "!\$1,TZ";
+}
+
+zero {
+	out "!\$1,Z,N";
+	in "!\$1,ZN";
 }
