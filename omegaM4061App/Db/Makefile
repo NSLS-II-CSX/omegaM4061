@@ -11,6 +11,8 @@ include $(TOP)/configure/CONFIG
 # Create and install (or just install) into <top>/db
 # databases, templates, substitutions like this
 DB += omegaM4061.db
+DB += liquid_he.db
+DB += N2_remaining.db
 DB_INSTALLS += $(EPICS_BASE)/db/iocAdminSoft.db
 
 #----------------------------------------------------

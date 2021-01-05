@@ -1,0 +1,11 @@
+record(calc, "$(Sys)$(Dev)F:LHe-I"){
+	field(INPA, "$(Sys)$(Dev)F-I")
+	field(CALC, "A/700")
+	field(SCAN, "1 second")
+}
+
+record(calc, "$(Sys)$(Dev)F:TLHe-I"){
+	field(INPA, "$(Sys)$(Dev)F:Total-I")
+	field(CALC, "A/700")
+	field(SCAN, "1 second")
+}
